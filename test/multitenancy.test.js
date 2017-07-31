@@ -3,6 +3,7 @@ var assert = require('assert');
 
 var restifyjwt = require('../lib');
 var restify = require('restify');
+var errors = require('restify-errors');
 
 describe('multitenancy', function(){
   var req = {};
@@ -20,7 +21,7 @@ describe('multitenancy', function(){
       return cb(null, tenants[issuer].secret);
     }
 
-    return cb(new restify.errors.UnauthorizedError('Could not find secret for issuer.'));
+    return cb(new errors.UnauthorizedError('Could not find secret for issuer.'));
   };
 
   var middleware = restifyjwt({

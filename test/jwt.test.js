@@ -3,6 +3,7 @@ var assert = require('assert');
 
 var restifyjwt = require('../lib');
 var restify = require('restify');
+var errors = require('restify-errors');
 
 describe('failure tests', function () {
   var req = {};
@@ -78,7 +79,7 @@ describe('failure tests', function () {
     restifyjwt({secret: 'different-shhhh'})(req, res, function(err) {
       assert.ok(err);
       assert.equal(err.body.code, 'InvalidCredentials');
-      assert.equal(err.we_cause.message, 'invalid signature');
+      assert.equal(err.cause().message, 'invalid signature');
     });
   });
 
@@ -91,7 +92,7 @@ describe('failure tests', function () {
     restifyjwt({secret: 'shhhhhh', audience: 'not-expected-audience'})(req, res, function(err) {
       assert.ok(err);
       assert.equal(err.body.code, 'InvalidCredentials');
-      assert.equal(err.we_cause.message, 'jwt audience invalid. expected: not-expected-audience');
+      assert.equal(err.cause().message, 'jwt audience invalid. expected: not-expected-audience');
     });
   });
 
@@ -104,7 +105,7 @@ describe('failure tests', function () {
     restifyjwt({secret: 'shhhhhh'})(req, res, function(err) {
       assert.ok(err);
       assert.equal(err.body.code, 'InvalidCredentials');
-      assert.equal(err.we_cause.message, 'jwt expired');
+      assert.equal(err.cause().message, 'jwt expired');
     });
   });
 
@@ -117,7 +118,7 @@ describe('failure tests', function () {
     restifyjwt({secret: 'shhhhhh', issuer: 'http://wrong'})(req, res, function(err) {
       assert.ok(err);
       assert.equal(err.body.code, 'InvalidCredentials');
-      assert.equal(err.we_cause.message, 'jwt issuer invalid. expected: http://wrong');
+      assert.equal(err.cause().message, 'jwt issuer invalid. expected: http://wrong');
     });
   });
 
@@ -126,7 +127,7 @@ describe('failure tests', function () {
     var token = jwt.sign({foo: 'bar'}, secret);
 
     function getTokenThatThrowsError() {
-      throw new restify.errors.InvalidCredentialsError('Invalid token!');
+      throw new errors.InvalidCredentialsError('Invalid token!');
     }
 
     restifyjwt({
@@ -154,7 +155,7 @@ describe('failure tests', function () {
       restifyjwt({secret: secret})(req,res, function(err) {
         assert.ok(err);
         assert.equal(err.body.code, 'InvalidCredentials');
-        assert.equal(err.we_cause.message, 'invalid token');
+        assert.equal(err.cause().message, 'invalid token');
       });
   });
 
