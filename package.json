@@ -1,6 +1,6 @@
 {
   "name": "restify-jwt",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "JWT authentication middleware.",
   "keywords": [
     "auth",
@@ -33,13 +33,13 @@
   ],
   "main": "./lib",
   "dependencies": {
-    "async": "^0.9.0",
-    "express-unless": "^0.3.0",
-    "jsonwebtoken": "^5.0.0"
+    "async": "^0.9.2",
+    "express-unless": "^0.3.1",
+    "jsonwebtoken": "^5.7.0"
   },
   "devDependencies": {
-    "mocha": "1.x.x",
-    "restify": "3.x"
+    "mocha": "3.x.x",
+    "restify": "5.x"
   },
   "peerDependencies": {
     "restify": "3.x || 4.x || 5.x",
