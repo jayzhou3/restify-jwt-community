@@ -25,7 +25,7 @@ describe('revoked jwts', function(){
 
     middleware(req, res, function(err) {
       assert.ok(err);
-      assert.equal(err.body.code, 'UnauthorizedError');
+      assert.equal(err.body.code, 'Unauthorized');
       assert.equal(err.message, 'The token has been revoked.');
     });
   });

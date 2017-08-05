@@ -48,7 +48,7 @@ describe('multitenancy', function(){
 
     middleware(req, res, function(err) {
       assert.ok(err);
-      assert.equal(err.body.code, 'UnauthorizedError');
+      assert.equal(err.body.code, 'Unauthorized');
       assert.equal(err.message, 'Could not find secret for issuer.');
     });
   });
@@ -66,7 +66,7 @@ describe('multitenancy', function(){
       }
     })(req, res, function(err) {
       assert.ok(err);
-      assert.equal(err.body.code, 'UnauthorizedError');
+      assert.equal(err.body.code, 'Unauthorized');
       assert.equal(err.message, 'The token has been revoked.');
     });
   });
