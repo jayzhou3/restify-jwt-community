@@ -52,7 +52,7 @@ describe('failure tests', function () {
     });
   });
 
-  it('should throw if authorization header is not Bearer', function() {
+  it('should throw if authorization header is not Bearer nor JWT', function() {
     req.headers = {};
     req.headers.authorization = 'Basic foobar';
     restifyjwt({secret: 'shhhh'})(req, res, function(err) {
@@ -165,12 +165,23 @@ describe('work tests', function () {
   var req = {};
   var res = {};
 
-  it('should work if authorization header is valid jwt', function() {
+  it('should work if authorization header is valid jwt ("Bearer <token>")', function() {
     var secret = 'shhhhhh';
     var token = jwt.sign({foo: 'bar'}, secret);
 
     req.headers = {};
     req.headers.authorization = 'Bearer ' + token;
+    restifyjwt({secret: secret})(req, res, function() {
+      assert.equal('bar', req.user.foo);
+    });
+  });
+
+  it('should work if authorization header is valid jwt ("JWT <token>")', function() {
+    var secret = 'shhhhhh';
+    var token = jwt.sign({foo: 'bar'}, secret);
+
+    req.headers = {};
+    req.headers.authorization = 'JWT ' + token;
     restifyjwt({secret: secret})(req, res, function() {
       assert.equal('bar', req.user.foo);
     });
