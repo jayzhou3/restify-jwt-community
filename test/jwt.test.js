@@ -36,7 +36,7 @@ describe('failure tests', function () {
     var corsReq = {};
     corsReq.method = 'OPTIONS';
     corsReq.headers = {
-      'access-control-request-headers': 'sasa, sras,  authorization'
+      'access-control-request-headers': 'sasa, sras,  authorization '
     };
     restifyjwt({secret: 'shhhh'})(corsReq, res, function(err) {
       assert.ok(!err);
