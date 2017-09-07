@@ -1,8 +1,8 @@
-var jwt = require('jsonwebtoken');
-var assert = require('assert');
-
-var restifyjwt = require('../lib');
-var restify = require('restify');
+const jwt = require('jsonwebtoken'),
+    assert = require('assert'),
+    restifyjwt = require('../lib'),
+    restify = require('restify'),
+    errors = require('restify-errors');
 
 describe('multitenancy', function(){
   var req = {};
@@ -20,7 +20,7 @@ describe('multitenancy', function(){
       return cb(null, tenants[issuer].secret);
     }
 
-    return cb(new restify.errors.UnauthorizedError('Could not find secret for issuer.'));
+    return cb(new errors.UnauthorizedError('Could not find secret for issuer.'));
   };
 
   var middleware = restifyjwt({
@@ -47,7 +47,7 @@ describe('multitenancy', function(){
 
     middleware(req, res, function(err) {
       assert.ok(err);
-      assert.equal(err.body.code, 'UnauthorizedError');
+      assert.equal(err.body.code, 'Unauthorized');
       assert.equal(err.message, 'Could not find secret for issuer.');
     });
   });
@@ -65,7 +65,7 @@ describe('multitenancy', function(){
       }
     })(req, res, function(err) {
       assert.ok(err);
-      assert.equal(err.body.code, 'UnauthorizedError');
+      assert.equal(err.body.code, 'Unauthorized');
       assert.equal(err.message, 'The token has been revoked.');
     });
   });

@@ -1,7 +1,6 @@
-var jwt = require('jsonwebtoken');
-var assert = require('assert');
-
-var restifyjwt = require('../lib');
+const jwt = require('jsonwebtoken'),
+    assert = require('assert'),
+    restifyjwt = require('../lib');
 
 describe('string tokens', function () {
   var req = {};

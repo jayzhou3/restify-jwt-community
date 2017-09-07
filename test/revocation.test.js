@@ -1,7 +1,6 @@
-var jwt = require('jsonwebtoken');
-var assert = require('assert');
-
-var restifyjwt = require('../lib');
+const jwt = require('jsonwebtoken'),
+    assert = require('assert'),
+    restifyjwt = require('../lib');
 
 describe('revoked jwts', function(){
   var secret = 'shhhhhh';
@@ -25,7 +24,7 @@ describe('revoked jwts', function(){
 
     middleware(req, res, function(err) {
       assert.ok(err);
-      assert.equal(err.body.code, 'UnauthorizedError');
+      assert.equal(err.body.code, 'Unauthorized');
       assert.equal(err.message, 'The token has been revoked.');
     });
   });

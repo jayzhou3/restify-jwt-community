@@ -1,8 +1,8 @@
-var jwt = require('jsonwebtoken');
-var assert = require('assert');
-
-var restifyjwt = require('../lib');
-var restify = require('restify');
+var jwt = require('jsonwebtoken'),
+    assert = require('assert'),
+    restifyjwt = require('../lib'),
+    restify = require('restify'),
+    errors = require('restify-errors');
 
 describe('failure tests', function () {
   var req = {};
@@ -126,7 +126,7 @@ describe('failure tests', function () {
     var token = jwt.sign({foo: 'bar'}, secret);
 
     function getTokenThatThrowsError() {
-      throw new restify.errors.InvalidCredentialsError('Invalid token!');
+      throw new errors.InvalidCredentialsError('Invalid token!');
     }
 
     restifyjwt({
@@ -140,22 +140,22 @@ describe('failure tests', function () {
 
 
   it('should throw error when signature is wrong', function() {
-      var secret = "shhh";
-      var token = jwt.sign({foo: 'bar', iss: 'http://www'}, secret);
-      // manipulate the token
-      var newContent = new Buffer("{foo: 'bar', edg: 'ar'}").toString('base64');
-      var splitetToken = token.split(".");
-      splitetToken[1] = newContent;
-      var newToken = splitetToken.join(".");
+    var secret = "shhh";
+    var token = jwt.sign({foo: 'bar', iss: 'http://www'}, secret);
+    // manipulate the token
+    var newContent = new Buffer("{foo: 'bar', edg: 'ar'}").toString('base64');
+    var splitetToken = token.split(".");
+    splitetToken[1] = newContent;
+    var newToken = splitetToken.join(".");
 
-      // build request
-      req.headers = [];
-      req.headers.authorization = 'Bearer ' + newToken;
-      restifyjwt({secret: secret})(req,res, function(err) {
-        assert.ok(err);
-        assert.equal(err.body.code, 'InvalidCredentials');
-        assert.equal(err.we_cause.message, 'invalid token');
-      });
+    // build request
+    req.headers = [];
+    req.headers.authorization = 'Bearer ' + newToken;
+    restifyjwt({secret: secret})(req,res, function(err) {
+      assert.ok(err);
+      assert.equal(err.body.code, 'InvalidCredentials');
+      assert.equal(err.we_cause.message, 'invalid token');
+    });
   });
 
 });

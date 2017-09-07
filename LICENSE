@@ -1,5 +1,9 @@
 The MIT License (MIT)
 
+Copyright (c) 2017 Francisco Buceta <frbuceta@gmail.com>
+
+New package <restify-jwt-community>
+
 Copyright (c) 2015 Vikrant Varma
 
 For parts of restify-jwt originating from the express-jwt
