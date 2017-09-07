@@ -107,8 +107,8 @@ describe('failure tests', function () {
     req.headers.authorization = 'Bearer ' + token;
     restifyjwt({secret: 'shhhhhh'})(req, res, function(err) {
       assert.ok(err);
-      assert.equal(err.body.code, 'InvalidCredentials');
-      assert.equal(err.jse_cause.message, 'jwt expired');
+      assert.equal(err.body.code, 'Unauthorized');
+      assert.equal(err.message, 'The token has expired');
       done();
     });
   });
