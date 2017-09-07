@@ -9,12 +9,13 @@ describe('failure tests', function () {
   var req = {};
   var res = {};
 
-  it('should throw if options not sent', function() {
+  it('should throw if options not sent', function(done) {
     try {
       restifyjwt();
     } catch(e) {
       assert.ok(e);
       assert.equal(e.message, 'secret should be set');
+      done()
     }
   });
 
@@ -70,7 +71,7 @@ describe('failure tests', function () {
     });
   });
 
-  it('should throw if authorization header is not valid jwt', function() {
+  it('should throw if authorization header is not valid jwt', function(done) {
     var secret = 'shhhhhh';
     var token = jwt.sign({foo: 'bar'}, secret);
 
@@ -79,11 +80,12 @@ describe('failure tests', function () {
     restifyjwt({secret: 'different-shhhh'})(req, res, function(err) {
       assert.ok(err);
       assert.equal(err.body.code, 'InvalidCredentials');
-      assert.equal(err.cause().message, 'invalid signature');
+      assert.equal(err.jse_cause.message, 'invalid signature');
+      done()
     });
   });
 
-  it('should throw if audience is not expected', function() {
+  it('should throw if audience is not expected', function(done) {
     var secret = 'shhhhhh';
     var token = jwt.sign({foo: 'bar', aud: 'expected-audience'}, secret);
 
@@ -92,11 +94,12 @@ describe('failure tests', function () {
     restifyjwt({secret: 'shhhhhh', audience: 'not-expected-audience'})(req, res, function(err) {
       assert.ok(err);
       assert.equal(err.body.code, 'InvalidCredentials');
-      assert.equal(err.cause().message, 'jwt audience invalid. expected: not-expected-audience');
+      assert.equal(err.jse_cause.message, 'jwt audience invalid. expected: not-expected-audience');
+      done();
     });
   });
 
-  it('should throw if token is expired', function() {
+  it('should throw if token is expired', function(done) {
     var secret = 'shhhhhh';
     var token = jwt.sign({foo: 'bar', exp: 1382412921 }, secret);
 
@@ -105,11 +108,12 @@ describe('failure tests', function () {
     restifyjwt({secret: 'shhhhhh'})(req, res, function(err) {
       assert.ok(err);
       assert.equal(err.body.code, 'InvalidCredentials');
-      assert.equal(err.cause().message, 'jwt expired');
+      assert.equal(err.jse_cause.message, 'jwt expired');
+      done();
     });
   });
 
-  it('should throw if token issuer is wrong', function() {
+  it('should throw if token issuer is wrong', function(done) {
     var secret = 'shhhhhh';
     var token = jwt.sign({foo: 'bar', iss: 'http://foo' }, secret);
 
@@ -118,7 +122,8 @@ describe('failure tests', function () {
     restifyjwt({secret: 'shhhhhh', issuer: 'http://wrong'})(req, res, function(err) {
       assert.ok(err);
       assert.equal(err.body.code, 'InvalidCredentials');
-      assert.equal(err.cause().message, 'jwt issuer invalid. expected: http://wrong');
+      assert.equal(err.jse_cause.message, 'jwt issuer invalid. expected: http://wrong');
+      done();
     });
   });
 
@@ -140,7 +145,7 @@ describe('failure tests', function () {
   });
 
 
-  it('should throw error when signature is wrong', function() {
+  it('should throw error when signature is wrong', function(done) {
       var secret = "shhh";
       var token = jwt.sign({foo: 'bar', iss: 'http://www'}, secret);
       // manipulate the token
@@ -155,7 +160,8 @@ describe('failure tests', function () {
       restifyjwt({secret: secret})(req,res, function(err) {
         assert.ok(err);
         assert.equal(err.body.code, 'InvalidCredentials');
-        assert.equal(err.cause().message, 'invalid token');
+        assert.equal(err.jse_cause.message, 'invalid token');
+        done();
       });
   });
 
