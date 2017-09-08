@@ -1,12 +1,10 @@
 {
-  "name": "restify-jwt",
+  "name": "restify-jwt-community",
   "version": "0.5.0",
   "description": "JWT authentication middleware.",
   "keywords": [
     "auth",
-    "authn",
     "authentication",
-    "authz",
     "authorization",
     "http",
     "jwt",
@@ -16,15 +14,16 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/amrav/restify-jwt.git"
+    "url": "git://github.com/frbuceta/restify-jwt-community.git"
   },
   "bugs": {
-    "url": "http://github.com/amrav/restify-jwt/issues"
+    "url": "http://github.com/frbuceta/restify-jwt-community/issues"
   },
   "author": {
-    "name": "Vikrant Varma",
-    "email": "vikrant.varma94@gmail.com"
+    "name": "Francisco Buceta",
+    "email": "frbuceta@gmail.com"
   },
+  "license": "SEE LICENSE IN LICENSE",
   "licenses": [
     {
       "type": "MIT",

@@ -1,15 +1,15 @@
-# restify-jwt
+# Restify Jwt Community
 
-[![NPM](https://img.shields.io/npm/v/restify-jwt.svg)](https://www.npmjs.com/package/restify-jwt)
-[![Build Status](https://travis-ci.org/amrav/restify-jwt.svg)](https://travis-ci.org/amrav/restify-jwt)
+* [![NPM](https://img.shields.io/npm/v/restify-jwt-community.svg)](https://www.npmjs.com/package/restify-jwt-community)
+* [![Build Status](https://travis-ci.org/frbuceta/restify-jwt-community.svg)](https://travis-ci.org/frbuceta/restify-jwt-community)
 
-[Restify](http://mcavage.me/node-restify/) middleware that validates JsonWebTokens and sets `req.user`.
+[Restify](http://restify.com/) middleware that validates JsonWebTokens and sets `req.user`.
 
 This module lets you authenticate HTTP requests using JWT tokens in your restify applications.
 
 ## Install
 
-    $ npm install restify-jwt
+    $ npm install restify-jwt-community
 
 ## Usage
 
@@ -20,7 +20,7 @@ to be used by later middleware for authorization and access control.
 For example,
 
 ```javascript
-var jwt = require('restify-jwt');
+var jwt = require('restify-jwt-community');
 
 app.get('/protected',
   jwt({secret: 'shhhhhhared-secret'}),
@@ -73,7 +73,7 @@ jwt({ secret: publicKey, requestProperty: 'auth' });
 A custom function for extracting the token from a request can be specified with
 the `getToken` option. This is useful if you need to pass the token through a
 query parameter or a cookie. You can throw an error in this function and it will
-be handled by `restify-jwt`.
+be handled by `restify-jwt-community`.
 
 ```javascript
 app.use(jwt({
@@ -100,7 +100,7 @@ If you are developing an application in which the secret used to sign tokens is 
 
 For example, if the secret varies based on the [JWT issuer](http://self-issued.info/docs/draft-ietf-oauth-json-web-token.html#issDef):
 ```javascript
-var jwt = require('restify-jwt');
+var jwt = require('restify-jwt-community');
 var data = require('./data');
 var utilities = require('./utilities');
 
@@ -134,7 +134,7 @@ It is possible that some tokens will need to be revoked so they cannot be used a
 
 For example, if the `(iss, jti)` claim pair is used to identify a JWT:
 ```javascript
-var jwt = require('restify-jwt');
+var jwt = require('restify-jwt-community');
 var data = require('./data');
 var utilities = require('./utilities');
 
@@ -185,7 +185,8 @@ can do it using the option _credentialsRequired_:
 
 ## Credits
 
-Based on [auth0/express-jwt](https://github.com/auth0/express-jwt). The major difference is that restify-jwt tries to use built in restify errors wherever possible.
+* Based on [auth0/express-jwt](https://github.com/auth0/express-jwt). The major difference is that restify-jwt tries to use built in restify errors wherever possible.
+* Also, based on [amrav/restify-jwt](https://github.com/amrav/restify-jwt). The official repo.
 
 ## License
 

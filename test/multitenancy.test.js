@@ -1,9 +1,8 @@
-var jwt = require('jsonwebtoken');
-var assert = require('assert');
-
-var restifyjwt = require('../lib');
-var restify = require('restify');
-var errors = require('restify-errors');
+const jwt = require('jsonwebtoken'),
+    assert = require('assert'),
+    restifyjwt = require('../lib'),
+    restify = require('restify'),
+    errors = require('restify-errors');
 
 describe('multitenancy', function(){
   var req = {};
