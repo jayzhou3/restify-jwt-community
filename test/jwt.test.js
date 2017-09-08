@@ -8,12 +8,13 @@ describe('failure tests', function () {
   var req = {};
   var res = {};
 
-  it('should throw if options not sent', function() {
+  it('should throw if options not sent', function(done) {
     try {
       restifyjwt();
     } catch(e) {
       assert.ok(e);
       assert.equal(e.message, 'secret should be set');
+      done()
     }
   });
 
@@ -35,7 +36,7 @@ describe('failure tests', function () {
     var corsReq = {};
     corsReq.method = 'OPTIONS';
     corsReq.headers = {
-      'access-control-request-headers': 'sasa, sras,  authorization'
+      'access-control-request-headers': 'sasa, sras,  authorization '
     };
     restifyjwt({secret: 'shhhh'})(corsReq, res, function(err) {
       assert.ok(!err);
@@ -51,7 +52,7 @@ describe('failure tests', function () {
     });
   });
 
-  it('should throw if authorization header is not Bearer', function() {
+  it('should throw if authorization header is not Bearer nor JWT', function() {
     req.headers = {};
     req.headers.authorization = 'Basic foobar';
     restifyjwt({secret: 'shhhh'})(req, res, function(err) {
@@ -69,7 +70,7 @@ describe('failure tests', function () {
     });
   });
 
-  it('should throw if authorization header is not valid jwt', function() {
+  it('should throw if authorization header is not valid jwt', function(done) {
     var secret = 'shhhhhh';
     var token = jwt.sign({foo: 'bar'}, secret);
 
@@ -78,11 +79,12 @@ describe('failure tests', function () {
     restifyjwt({secret: 'different-shhhh'})(req, res, function(err) {
       assert.ok(err);
       assert.equal(err.body.code, 'InvalidCredentials');
-      assert.equal(err.we_cause.message, 'invalid signature');
+      assert.equal(err.jse_cause.message, 'invalid signature');
+      done()
     });
   });
 
-  it('should throw if audience is not expected', function() {
+  it('should throw if audience is not expected', function(done) {
     var secret = 'shhhhhh';
     var token = jwt.sign({foo: 'bar', aud: 'expected-audience'}, secret);
 
@@ -91,11 +93,12 @@ describe('failure tests', function () {
     restifyjwt({secret: 'shhhhhh', audience: 'not-expected-audience'})(req, res, function(err) {
       assert.ok(err);
       assert.equal(err.body.code, 'InvalidCredentials');
-      assert.equal(err.we_cause.message, 'jwt audience invalid. expected: not-expected-audience');
+      assert.equal(err.jse_cause.message, 'jwt audience invalid. expected: not-expected-audience');
+      done();
     });
   });
 
-  it('should throw if token is expired', function() {
+  it('should throw if token is expired', function(done) {
     var secret = 'shhhhhh';
     var token = jwt.sign({foo: 'bar', exp: 1382412921 }, secret);
 
@@ -103,12 +106,13 @@ describe('failure tests', function () {
     req.headers.authorization = 'Bearer ' + token;
     restifyjwt({secret: 'shhhhhh'})(req, res, function(err) {
       assert.ok(err);
-      assert.equal(err.body.code, 'InvalidCredentials');
-      assert.equal(err.we_cause.message, 'jwt expired');
+      assert.equal(err.body.code, 'Unauthorized');
+      assert.equal(err.message, 'The token has expired');
+      done();
     });
   });
 
-  it('should throw if token issuer is wrong', function() {
+  it('should throw if token issuer is wrong', function(done) {
     var secret = 'shhhhhh';
     var token = jwt.sign({foo: 'bar', iss: 'http://foo' }, secret);
 
@@ -117,7 +121,8 @@ describe('failure tests', function () {
     restifyjwt({secret: 'shhhhhh', issuer: 'http://wrong'})(req, res, function(err) {
       assert.ok(err);
       assert.equal(err.body.code, 'InvalidCredentials');
-      assert.equal(err.we_cause.message, 'jwt issuer invalid. expected: http://wrong');
+      assert.equal(err.jse_cause.message, 'jwt issuer invalid. expected: http://wrong');
+      done();
     });
   });
 
@@ -139,23 +144,24 @@ describe('failure tests', function () {
   });
 
 
-  it('should throw error when signature is wrong', function() {
-    var secret = "shhh";
-    var token = jwt.sign({foo: 'bar', iss: 'http://www'}, secret);
-    // manipulate the token
-    var newContent = new Buffer("{foo: 'bar', edg: 'ar'}").toString('base64');
-    var splitetToken = token.split(".");
-    splitetToken[1] = newContent;
-    var newToken = splitetToken.join(".");
+  it('should throw error when signature is wrong', function(done) {
+      var secret = "shhh";
+      var token = jwt.sign({foo: 'bar', iss: 'http://www'}, secret);
+      // manipulate the token
+      var newContent = new Buffer("{foo: 'bar', edg: 'ar'}").toString('base64');
+      var splitetToken = token.split(".");
+      splitetToken[1] = newContent;
+      var newToken = splitetToken.join(".");
 
-    // build request
-    req.headers = [];
-    req.headers.authorization = 'Bearer ' + newToken;
-    restifyjwt({secret: secret})(req,res, function(err) {
-      assert.ok(err);
-      assert.equal(err.body.code, 'InvalidCredentials');
-      assert.equal(err.we_cause.message, 'invalid token');
-    });
+      // build request
+      req.headers = [];
+      req.headers.authorization = 'Bearer ' + newToken;
+      restifyjwt({secret: secret})(req,res, function(err) {
+        assert.ok(err);
+        assert.equal(err.body.code, 'InvalidCredentials');
+        assert.equal(err.jse_cause.message, 'invalid token');
+        done();
+      });
   });
 
 });
@@ -164,12 +170,23 @@ describe('work tests', function () {
   var req = {};
   var res = {};
 
-  it('should work if authorization header is valid jwt', function() {
+  it('should work if authorization header is valid jwt ("Bearer <token>")', function() {
     var secret = 'shhhhhh';
     var token = jwt.sign({foo: 'bar'}, secret);
 
     req.headers = {};
     req.headers.authorization = 'Bearer ' + token;
+    restifyjwt({secret: secret})(req, res, function() {
+      assert.equal('bar', req.user.foo);
+    });
+  });
+
+  it('should work if authorization header is valid jwt ("JWT <token>")', function() {
+    var secret = 'shhhhhh';
+    var token = jwt.sign({foo: 'bar'}, secret);
+
+    req.headers = {};
+    req.headers.authorization = 'JWT ' + token;
     restifyjwt({secret: secret})(req, res, function() {
       assert.equal('bar', req.user.foo);
     });

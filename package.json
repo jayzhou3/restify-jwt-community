@@ -32,9 +32,9 @@
   ],
   "main": "./lib",
   "dependencies": {
-    "async": "^0.9.2",
+    "async": "^2.5.0",
     "express-unless": "^0.3.1",
-    "jsonwebtoken": "^5.7.0"
+    "jsonwebtoken": "^8.0.0"
   },
   "devDependencies": {
     "mocha": "3.x.x",
