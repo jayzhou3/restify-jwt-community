@@ -48,7 +48,7 @@ describe('failure tests', function () {
     req.headers.authorization = 'wrong';
     restifyjwt({secret: 'shhhh'})(req, res, function(err) {
       assert.ok(err);
-      assert.equal(err.message, 'Format is Authorization: Bearer [token]');
+      assert.equal(err.message, 'Format is Authorization: Bearer [token] or Jwt [token]');
     });
   });
 
