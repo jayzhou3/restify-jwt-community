@@ -11,7 +11,7 @@ This module lets you authenticate HTTP requests using JWT tokens in your restify
 
 ## Install
 
-    $ npm install restify-jwt-community
+    $ npm i restify-jwt-community
 
 ## Usage
 
