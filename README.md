@@ -1,7 +1,9 @@
 # Restify Jwt Community
 
-* [![NPM](https://img.shields.io/npm/v/restify-jwt-community.svg)](https://www.npmjs.com/package/restify-jwt-community)
-* [![Build Status](https://travis-ci.org/frbuceta/restify-jwt-community.svg)](https://travis-ci.org/frbuceta/restify-jwt-community)
+* [![NPM](https://img.shields.io/npm/v/restify-jwt-community.svg?style=flat-square)](https://www.npmjs.com/package/restify-jwt-community) [![GitHub last commit](https://img.shields.io/github/last-commit/frbuceta/restify-jwt-community.svg?style=flat-square)](https://github.com/frbuceta/restify-jwt-community)
+* [![Build Status](https://travis-ci.org/frbuceta/restify-jwt-community.svg?style=flat-square)](https://travis-ci.org/frbuceta/restify-jwt-community)
+* [![NPM](https://david-dm.org/frbuceta/restify-jwt-community.svg?style=flat-square)](https://github.com/frbuceta/restify-jwt-community) [![NPM](https://david-dm.org/frbuceta/restify-jwt-community/dev-status.svg?style=flat-square)](https://github.com/frbuceta/restify-jwt-community)
+* [![Coverage Status](https://coveralls.io/repos/github/frbuceta/restify-jwt-community/badge.svg?branch=master)](https://coveralls.io/github/frbuceta/restify-jwt-community?branch=master)
 
 [Restify](http://restify.com/) middleware that validates JsonWebTokens and sets `req.user`.
 
