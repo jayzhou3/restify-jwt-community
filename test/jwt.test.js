@@ -164,6 +164,19 @@ describe('failure tests', function () {
       });
   });
 
+  it('should throw error when payload is modify', function() {
+    var secret = 'shhhh';
+    var token = jwt.sign({foo: 'bar'}, secret);
+    token = token.split('.');
+
+    req.headers = {};
+    req.headers.authorization = 'Bearer ' + token[0] + '.MODIFY' + token[1] + '.' + token[2];
+    restifyjwt({secret: secret})(req, res, function(err) {
+      assert.ok(err);
+      assert.equal(err.body.code, 'InvalidCredentials');
+    });
+  });
+
 });
 
 describe('work tests', function () {
