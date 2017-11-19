@@ -1,10 +1,9 @@
-const jwt = require('jsonwebtoken'),
-    assert = require('assert'),
-    restifyjwt = require('../lib'),
-    restify = require('restify'),
-    errors = require('restify-errors');
+const assert = require('assert'),
+  errors = require('restify-errors'),
+  jwt = require('jsonwebtoken'),
+  restifyjwt = require('../lib');
 
-describe('multitenancy', function(){
+describe('multitenancy', function () {
   var req = {};
   var res = {};
 
@@ -14,9 +13,9 @@ describe('multitenancy', function(){
     }
   };
 
-  var secretCallback = function(req, payload, cb){
+  var secretCallback = function (req, payload, cb) {
     var issuer = payload.iss;
-    if (tenants[issuer]){
+    if (tenants[issuer]) {
       return cb(null, tenants[issuer].secret);
     }
 
@@ -27,43 +26,43 @@ describe('multitenancy', function(){
     secret: secretCallback
   });
 
-  it ('should retrieve secret using callback', function(){
-    var token = jwt.sign({ iss: 'a', foo: 'bar'}, tenants.a.secret);
+  it('should retrieve secret using callback', function () {
+    var token = jwt.sign({iss: 'a', foo: 'bar'}, tenants.a.secret);
 
     req.headers = {};
     req.headers.authorization = 'Bearer ' + token;
 
-    middleware(req, res, function() {
+    middleware(req, res, function () {
       assert.equal('bar', req.user.foo);
     });
   });
 
-  it ('should throw if an error ocurred when retrieving the token', function(){
+  it('should throw if an error ocurred when retrieving the token', function () {
     var secret = 'shhhhhh';
-    var token = jwt.sign({ iss: 'inexistent', foo: 'bar'}, secret);
+    var token = jwt.sign({iss: 'inexistent', foo: 'bar'}, secret);
 
     req.headers = {};
     req.headers.authorization = 'Bearer ' + token;
 
-    middleware(req, res, function(err) {
+    middleware(req, res, function (err) {
       assert.ok(err);
       assert.equal(err.body.code, 'Unauthorized');
       assert.equal(err.message, 'Could not find secret for issuer.');
     });
   });
 
-  it ('should fail if token is revoked', function(){
-    var token = jwt.sign({ iss: 'a', foo: 'bar'}, tenants.a.secret);
+  it('should fail if token is revoked', function () {
+    var token = jwt.sign({iss: 'a', foo: 'bar'}, tenants.a.secret);
 
     req.headers = {};
     req.headers.authorization = 'Bearer ' + token;
 
     var middleware = restifyjwt({
       secret: secretCallback,
-      isRevoked: function(req, payload, done){
+      isRevoked: function (req, payload, done) {
         done(null, true);
       }
-    })(req, res, function(err) {
+    })(req, res, function (err) {
       assert.ok(err);
       assert.equal(err.body.code, 'Unauthorized');
       assert.equal(err.message, 'The token has been revoked.');
