@@ -32,14 +32,14 @@
   ],
   "main": "./lib",
   "dependencies": {
-    "async": "^2.6.0",
+    "async": "^2.6.1",
     "express-unless": "^0.5.0",
     "jsonwebtoken": "^8.2.1",
     "restify-errors": "^6.0.0"
   },
   "devDependencies": {
-    "jest": "^22.4.3",
-    "restify": "^7.1.1"
+    "jest": "^23.0.0",
+    "restify": "^7.2.0"
   },
   "peerDependencies": {
     "restify": "5.x || 6.x || 7.x",
