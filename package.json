@@ -1,6 +1,6 @@
 {
   "name": "restify-jwt-community",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "JWT authentication middleware.",
   "keywords": [
     "auth",
