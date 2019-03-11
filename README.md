@@ -14,11 +14,29 @@ This module lets you authenticate HTTP requests using JWT tokens in your restify
 
 ## Status
 
-[![NPM](https://img.shields.io/npm/v/restify-jwt-community.svg?style=for-the-badge)](https://www.npmjs.com/package/restify-jwt-community) [![GitHub issues](https://img.shields.io/github/issues/frbuceta/restify-jwt-community.svg?style=for-the-badge)](https://github.com/frbuceta/restify-jwt-community)
+<p align="center">
+    <a href="https://www.npmjs.com/package/restify-jwt-community" alt="NPM">
+        <img src="https://img.shields.io/npm/v/restify-jwt-community.svg?style=for-the-badge" /></a>
+    <a href="https://github.com/frbuceta/restify-jwt-community" alt="GitHub last commit">
+        <img src="https://img.shields.io/github/last-commit/frbuceta/restify-jwt-community.svg?color=blue&style=for-the-badge" /></a>
+    <a href="https://github.com/frbuceta/restify-jwt-community/issues" alt="GitHub issues">
+        <img src="https://img.shields.io/github/issues/frbuceta/restify-jwt-community.svg?color=blue&style=for-the-badge" /></a>
+    <a href="https://github.com/frbuceta/restify-jwt-community/pulls" alt="GitHub pull requests">
+        <img src="https://img.shields.io/github/issues-pr/frbuceta/restify-jwt-community.svg?color=blue&style=for-the-badge" /></a>
+</p>
 
-* [![GitHub last commit](https://img.shields.io/github/last-commit/frbuceta/restify-jwt-community.svg?style=flat-square)](https://github.com/frbuceta/restify-jwt-community) [![Build Status](https://travis-ci.org/frbuceta/restify-jwt-community.svg?style=flat-square)](https://travis-ci.org/frbuceta/restify-jwt-community)
-* [![NPM Dependencies](https://david-dm.org/frbuceta/restify-jwt-community.svg?style=flat-square)](https://github.com/frbuceta/restify-jwt-community) [![NPM DevDependencies](https://david-dm.org/frbuceta/restify-jwt-community/dev-status.svg?style=flat-square)](https://github.com/frbuceta/restify-jwt-community)
-* [![Coverage Status](https://coveralls.io/repos/github/frbuceta/restify-jwt-community/badge.svg?branch=master)](https://coveralls.io/github/frbuceta/restify-jwt-community?branch=master)
+---
+
+<p align="center">
+    <a href="#"><img src="https://img.shields.io/david/frbuceta/restify-jwt-community.svg?style=flat-square" /></a>
+    <a href="#"><img src="https://img.shields.io/david/dev/frbuceta/restify-jwt-community.svg?style=flat-square" /></a>
+    <a href="#"><img src="https://img.shields.io/david/peer/frbuceta/restify-jwt-community.svg?style=flat-square" /></a>
+</p>
+
+<p align="center">
+    <a href="#" alt="Travis branch"><img src="https://img.shields.io/travis/com/frbuceta/restify-jwt-community/master.svg?style=flat-square" /></a>
+    <a href="#" alt="Coveralls github branch"><img src="https://img.shields.io/coveralls/github/frbuceta/restify-jwt-community/master.svg?style=flat-square" /></a>
+</p>
 
 ## Credits
 
