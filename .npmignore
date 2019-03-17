@@ -1,0 +1,10 @@
+.DS_Store
+.idea
+.vscode
+.git
+.travis.yml
+.editorconfig
+.gitignore
+coverage/*
+docs/*
+test/*
