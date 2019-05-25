@@ -74,7 +74,7 @@
     "test:coverage": "node node_modules/.bin/jest --coverage"
   },
   "dependencies": {
-    "async": "^2.6.2",
+    "async": "^3.0.0",
     "express-unless": "^0.5.0",
     "jsonwebtoken": "^8.5.1",
     "restify-errors": "^8.0.0"
