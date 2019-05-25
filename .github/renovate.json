@@ -1,5 +1,18 @@
 {
-  "extends": [
-    "config:base"
-  ]
+  "pinVersions": false,
+  "baseBranches": [
+    "master"
+  ],
+  "packageRules": [
+    {
+      "packagePatterns": [
+        "^restify*"
+      ],
+      "groupName": "restify"
+    }
+  ],
+  "vulnerabilityAlerts": {
+    "labels": ["security"],
+    "assignees": ["@frbuceta"]
+  }
 }
