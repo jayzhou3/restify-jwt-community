@@ -12,61 +12,22 @@
     "oauth",
     "restify"
   ],
-  "homepage": "https://github.com/frbuceta/restify-jwt-community",
-  "bugs": {
-    "url": "https://github.com/frbuceta/restify-jwt-community/issues"
-  },
-  "license": "SEE LICENSE IN <filename>",
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://www.opensource.org/licenses/MIT"
-    }
+  "files": [
+    "readme.md",
+    "lib",
+    "test"
   ],
+  "main": "./lib",
   "author": {
     "name": "Francisco Buceta",
     "email": "frbuceta@gmail.com",
     "url": "https://github.com/frbuceta/"
   },
-  "contributors": [
-    "José F. Romaniello <jfromaniello@gmail.com> (https://github.com/jfromaniello)",
-    "Vikrant Varma (https://github.com/amrav)",
-    "Matias Woloski <matiasw@gmail.com> (https://github.com/woloski)",
-    "Leonardo Dutra <leodutra.br@gmail.com> (https://github.com/leodutra)",
-    "Damian Schenkelman (https://github.com/dschenkelman)",
-    "Alberto Pose <albertopose@gmail.com> (https://github.com/pose)",
-    "Peter Stromquist (https://github.com/twistedstream)",
-    "Marc Kuo <marc@routific.com> (https://github.com/mck-)",
-    "Jake Gavin (https://github.com/jakegavin)",
-    "Kasper Koho (https://github.com/AntiPaste)",
-    "Carl Levasseur (https://github.com/CLevasseur)",
-    "Emil Janitzek (https://github.com/pixel2)",
-    "Nathan Totten <nathan@ntotten.com> (https://github.com/ntotten)",
-    "Josh Hardy <Josh.hardy.ufen@gmail.com> (https://github.com/Prophet32j)",
-    "David Fox <fox@obtotech.com> (https://github.com/obto)",
-    "Fanis Katsimpas <katsimpas.f@gmail.com> (https://github.com/fanixk)",
-    "Ralph Samuel <theralphsamuel@gmail.com> (https://github.com/philosoralphter)",
-    "Alan James <alanjames1987@gmail.com> (https://github.com/alanjames1987)",
-    "Aaron Ogle (https://github.com/geekgonecrazy)",
-    "Nick Comer <nick@comer.io> (https://github.com/nkcmr)",
-    "Godeatgod (https://github.com/godeatgod)",
-    "Danny Scott (https://github.com/dannyrscott)",
-    "Sebastian Blei (https://github.com/iamsebastian)",
-    "Davis Kim (https://github.com/davis)",
-    "Michał Mikołajczyk <michal.mikolajczyk@toptal.com> (https://github.com/michalmikolajczyk)",
-    "Joshua Perry (https://github.com/joshperry)",
-    "Alexander Tseung (https://github.com/alextsg)",
-    "Markus Heider (https://github.com/mheider)",
-    "Michael Taylor Scheer (https://github.com/ScheerMT)",
-    "Rusty Bailey <rustylbailey@gmail.com> (https://github.com/rustybailey)",
-    "Jared Hanson <jaredhanson@gmail.com> (https://github.com/jaredhanson)",
-    "Gastón Silva <givanse@gmail.com> (https://github.com/givanse)",
-    "Mietennet (https://github.com/mietennet)"
-  ],
-  "main": "./lib",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/frbuceta/restify-jwt-community.git"
+  "license": "MIT",
+  "homepage": "https://github.com/frbuceta/restify-jwt-community#readme",
+  "repository": "github:frbuceta/restify-jwt-community",
+  "bugs": {
+    "url": "https://github.com/frbuceta/restify-jwt-community/issues"
   },
   "scripts": {
     "test": "node node_modules/.bin/jest",
