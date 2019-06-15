@@ -1,10 +1,9 @@
 sudo: false
 language: "node_js"
 node_js:
-  - "6"
   - "8"
-  - "lts/*"
-  - "node"
+  - "10"
+  - "12"
 branches:
   only:
     - master
