@@ -1,14 +1,19 @@
 {
-  "pinVersions": false,
   "baseBranches": [
     "master"
   ],
+  "supportPolicy": ["all"],
+  "travis": { "enabled": true },
   "packageRules": [
     {
       "packagePatterns": [
         "^restify*"
       ],
       "groupName": "restify"
+    },
+    {
+    "depTypeList": ["devDependencies"],
+    "automerge": true
     }
   ],
   "vulnerabilityAlerts": {
