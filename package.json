@@ -30,6 +30,8 @@
     "url": "https://github.com/frbuceta/restify-jwt-community/issues"
   },
   "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "test": "node node_modules/.bin/jest",
     "test:dev": "node_modules/.bin/jest --watch",
     "test:coverage": "node node_modules/.bin/jest --coverage"
@@ -41,7 +43,12 @@
     "restify-errors": "^8.0.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^8.0.0",
+    "@commitlint/config-conventional": "^8.0.0",
     "@types/restify-errors": "^4.3.3",
+    "eslint": "^6.0.1",
+    "eslint-config-google": "^0.13.0",
+    "husky": "^3.0.0",
     "jest": "^24.8.0",
     "restify": "^8.3.1"
   },
@@ -51,5 +58,12 @@
   },
   "engines": {
     "node": ">= 4.0"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "npm run lint:fix",
+      "pre-push": "npm test"
+    }
   }
 }
