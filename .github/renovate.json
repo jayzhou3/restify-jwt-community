@@ -1,21 +1,8 @@
 {
-  "baseBranches": [
-    "master"
-  ],
+  "branchPrefix": "renovate/",
+  "rangeStrategy": "bump",
   "supportPolicy": ["all"],
   "travis": { "enabled": true },
-  "packageRules": [
-    {
-      "packagePatterns": [
-        "^restify*"
-      ],
-      "groupName": "restify"
-    },
-    {
-      "depTypeList": ["devDependencies"],
-      "automerge": true
-    }
-  ],
   "vulnerabilityAlerts": {
     "labels": ["security"],
     "assignees": ["@frbuceta"]
