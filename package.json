@@ -46,7 +46,7 @@
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^8.1.0",
     "@types/restify-errors": "^4.3.3",
-    "eslint": "^6.0.1",
+    "eslint": "^6.1.0",
     "eslint-config-google": "^0.13.0",
     "husky": "^3.0.1",
     "jest": "^24.8.0",
