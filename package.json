@@ -34,7 +34,8 @@
     "lint:fix": "eslint . --fix",
     "test": "node node_modules/.bin/jest",
     "test:dev": "node_modules/.bin/jest --watch",
-    "test:coverage": "node node_modules/.bin/jest --coverage"
+    "test:coverage": "node node_modules/.bin/jest --coverage",
+    "prepublishOnly": "standard-version"
   },
   "dependencies": {
     "async": "^3.1.0",
@@ -51,7 +52,8 @@
     "eslint-config-google": "^0.13.0",
     "husky": "^3.0.3",
     "jest": "^24.8.0",
-    "restify": "^8.4.0"
+    "restify": "^8.4.0",
+    "standard-version": "^7.0.0"
   },
   "peerDependencies": {
     "restify": "5.x || 6.x || 7.x || 8.x",
